@@ -24,7 +24,7 @@ public class Lab03 {
         //lab3zad1();
         //lab3zad2a();
         //lab3zad2b();
-        //lab3zad3();
+        lab3zad3();
     }
     
     
@@ -115,6 +115,7 @@ public class Lab03 {
         Pakowanie do list i do map po <id, Produkt> i <category, List<Products>
         */
         List<Product> listProducts = new ArrayList<>();
+        
         Map<Integer, Product> mapProduct = new HashMap<>();
         Map<String, List<Product>> mapList = new HashMap<>();
         
@@ -134,8 +135,17 @@ public class Lab03 {
                 listProducts.add(product);
                 
                 mapProduct.put(id, product);
-                mapList.put(pola[2], listProducts);
-
+                
+                List<Product> listInCategory;
+                
+                if(mapList.containsKey(pola[2])){
+                    mapList.get(pola[2]).add(product);
+                }else{
+                    listInCategory = new ArrayList<>();
+                    listInCategory.add(product);
+                    mapList.put(pola[2], listInCategory);
+                }
+                
                 s = in.readLine();
             }
             
@@ -149,7 +159,7 @@ public class Lab03 {
         
         System.out.println("\nKategorie: ");
         for(String s : mapList.keySet()){
-            System.out.println( s );
+            System.out.println(mapList.get(s).get(0).getName() );
         }
     }
 }
